@@ -1,0 +1,264 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 10px;
+    background-color: black;
+    position: relative;
+  }
+
+  .image {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .item {
+    border: 2px solid gray;
+    border-radius: 20px;
+    box-shadow: 5px 5px 4px 2px gray;
+    overflow: hidden;
+    padding: 10px;
+    text-align: center;
+    background-color: white;
+    margin: 10px;
+
+
+  }
+
+  .button1 {
+    background-color: red;
+    padding: 15px;
+    border-radius: 20px;
+  }
+
+  .item:hover {
+    transform: scale(1.1);
+    transition: 0.6s ease;
+  }
+
+  .description {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .btncontainer{
+    width: 100%;
+    height: 100px;
+    text-align: center;
+  }
+  #category,option{
+    padding: 15px 100px 10px 20px;
+    margin-top: 20px;
+    font-size: 1.1rem;
+  }
+  /* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  padding: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #25b09b;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  --_m: 
+    conic-gradient(#0000 10%,#000),
+    linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+          mask: var(--_m);
+  -webkit-mask-composite: source-out;
+          mask-composite: subtract;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {to{transform: rotate(1turn)}}
+</style>
+
+<body>
+  <div class="btncontainer" id="btncontainer">
+    <form action="">
+      <label for="category">
+        <select name="category" id="category" placeholder="category">
+          <option id="" value="all">All</option>
+          <option value="men's">men's Clothings</option>
+          <option value="women's">Women's Clothings</option>
+          <option value="electronics">Electronics</option>
+          <option value="jewelery">Jewelery</option>
+        </select>
+      </label>
+    </form>
+  </div>
+  <div class="container" id="container"></div>
+  <div id="loader"></div>
+  <script src="./json-JS.js"></script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product List</title>
+</head>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 10px;
+    position: relative;
+  }
+
+  .image {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .item {
+    border: 2px solid gray;
+    border-radius: 20px;
+    box-shadow: 5px 5px 4px 2px gray;
+    overflow: hidden;
+    padding: 10px;
+    text-align: center;
+    background-color: white;
+    margin: 10px;
+  }
+
+  .button1 {
+    background-color: red;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .button1:hover {
+    background-color: darkred;
+  }
+
+  .item:hover {
+    transform: scale(1.1);
+    transition: 0.3s ease;
+  }
+
+  .btncontainer {
+    text-align: center;
+    margin: 20px;
+    position: relative;
+  }
+
+  /* Dropdown Styling */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropbtn {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .dropbtn:hover {
+    background-color: #0056b3;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 150px;
+    text-align: left;
+    border-radius: 5px;
+  }
+
+  .dropdown-content button {
+    background: none;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .dropdown-content button:hover {
+    background-color: #f1f1f1;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Loader Styling */
+  .loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid lightgray;
+    border-top: 5px solid blue;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+
+<body>
+
+  <div class="btncontainer">
+    <div class="dropdown">
+      <button class="dropbtn">Filter by Category</button>
+      <div class="dropdown-content" id="categoryDropdown"></div>
+    </div>
+  </div>
+
+  <div class="container" id="container"></div>
+  <div id="loader" class="loader"></div>
+
+  <script src="./json-JS.js"></script>
+
+</body>
+</html>
